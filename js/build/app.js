@@ -63,7 +63,8 @@ var EVENTS = {
     force: {y: 6, z: -2, m: 2400, xk: 8},
     init: function () {
         console.log(3)
-        console.log(APP)
+        console.log({APP})
+        console.log('APP.isMobile',APP.isMobile )
         APP.world = new WHS.World({
             autoresize: "window",
             softbody: !0,
@@ -73,11 +74,11 @@ var EVENTS = {
             physics: {fixedTimeStep: !!APP.isMobile && 1 / 35},
             gravity: {y: -200}
         });
-        console.log(4.5);
+        console.log(4);
         
         APP.camera = APP.world.getCamera(), APP.camera.lookAt(new THREE.Vector3(0, APP.basketY, 0)), APP.ProgressLoader = new ProgressLoader(APP.isMobile ? 12 : 14), APP.createScene(), APP.addLights(), APP.addBasket(), APP.addBall(), APP.initEvents(), APP.keep_ball = keep_ball(APP), APP.world.addLoop(APP.keep_ball), APP.keep_ball.start(), APP.world.start();
 
-        console.log(4)
+        console.log(5)
     },
     createScene: function () {
         console.log('createScene');
