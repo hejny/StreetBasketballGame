@@ -62,6 +62,8 @@ var EVENTS = {
     cursor: {x: 0, y: 0, xCenter: window.innerWidth / 2, yCenter: window.innerHeight / 2},
     force: {y: 6, z: -2, m: 2400, xk: 8},
     init: function () {
+        console.log(3)
+        console.log(APP)
         APP.world = new WHS.World({
             autoresize: "window",
             softbody: !0,
@@ -70,9 +72,15 @@ var EVENTS = {
             camera: {z: 50, y: APP.basketY, aspect: 45},
             physics: {fixedTimeStep: !!APP.isMobile && 1 / 35},
             gravity: {y: -200}
-        }), APP.camera = APP.world.getCamera(), APP.camera.lookAt(new THREE.Vector3(0, APP.basketY, 0)), APP.ProgressLoader = new ProgressLoader(APP.isMobile ? 12 : 14), APP.createScene(), APP.addLights(), APP.addBasket(), APP.addBall(), APP.initEvents(), APP.keep_ball = keep_ball(APP), APP.world.addLoop(APP.keep_ball), APP.keep_ball.start(), APP.world.start()
+        });
+        console.log(4.5);
+        
+        APP.camera = APP.world.getCamera(), APP.camera.lookAt(new THREE.Vector3(0, APP.basketY, 0)), APP.ProgressLoader = new ProgressLoader(APP.isMobile ? 12 : 14), APP.createScene(), APP.addLights(), APP.addBasket(), APP.addBall(), APP.initEvents(), APP.keep_ball = keep_ball(APP), APP.world.addLoop(APP.keep_ball), APP.keep_ball.start(), APP.world.start();
+
+        console.log(4)
     },
     createScene: function () {
+        console.log('createScene');
         APP.ground = new WHS.Plane({
             geometry: {buffer: !0, width: 1e3, height: 800},
             mass: 0,
@@ -196,20 +204,25 @@ var EVENTS = {
         })
     },
     initEvents: function () {
+        console.log('initEvents');
         EVENTS._move(APP), EVENTS._click(APP), EVENTS._keypress(APP), EVENTS._resize(APP), APP.ProgressLoader.step()
     },
     updateCoords: function (e) {
+        console.log('updateCoords');
         e.preventDefault(), APP.cursor.x = e.touches && e.touches[0] ? e.touches[0].clientX : e.clientX, APP.cursor.y = e.touches && e.touches[0] ? e.touches[0].clientY : e.clientY
     },
     checkKeys: function (e) {
+        console.log('checkKeys');
         e.preventDefault(), "Space" === e.code && (APP.thrown = !1)
     },
     detectDoubleTap: function () {
+        console.log('detectDoubleTap');
         return APP.doubletap ? (APP.thrown = !1, APP.doubletap = !0, !0) : (APP.doubletap = !0, setTimeout(function () {
             APP.doubletap = !1
         }, APP.doubleTapTime), !1)
     },
     throwBall: function (e) {
+        console.log('throwBall');
         APP.goal = false;
         console.log("reset goaal", APP.goal)
         // TODO: count points
@@ -219,11 +232,14 @@ var EVENTS = {
         }
     },
     keepBall: function () {
+        console.log('keepBall');
         var e = APP.cursor, t = (e.x - e.xCenter) / window.innerWidth * 32,
             o = -(e.y - e.yCenter) / window.innerHeight * 32;
         APP.ball.position.set(t, o, -36)
     }
 };
+console.log(1);
 basket.require({url: "bower_components/whitestorm/build/whitestorm.js"}).then(function () {
+    console.log(2);
     APP.init()
 });
