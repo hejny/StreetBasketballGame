@@ -2,23 +2,28 @@ var goal_counter = 0;
 var counter_txt = document.getElementById("counter_txt");
 var EVENTS = {
     _click: function (e) {
+        console.log('_click');
         window.addEventListener("click", e.throwBall), window.addEventListener("click", function () {
             var t = e.world.getRenderer().domElement;
             !t.fullscreenElement && e.isMobile && (t.webkitRequestFullscreen && t.webkitRequestFullscreen(), t.mozRequestFullscreen && t.mozRequestFullscreen(), t.msRequestFullscreen && t.msRequestFullscreen(), t.requestFullscreen && t.requestFullscreen())
         })
     }, _move: function (e) {
+        console.log('_move');
         ["mousemove", "touchmove"].forEach(function (t) {
             window.addEventListener(t, e.updateCoords)
         })
     }, _keypress: function (e) {
+        console.log('_keypress');
         window.addEventListener("keypress", e.checkKeys)
     }, _resize: function (e) {
+        console.log('_resize');
         e.cursor.xCenter = window.innerWidth / 2, e.cursor.yCenter = window.innerHeight / 2, window.addEventListener("resize", function () {
             var e = document.querySelector(".whs canvas").style;
             e.width = "100%", e.height = "100%"
         })
     }
 }, keep_ball = function (e) {
+    console.log('keep_ball');
     return new WHS.Loop(function () {
         e.thrown || e.keepBall();
         var t = e.ball.position, o = e.basket.position;
